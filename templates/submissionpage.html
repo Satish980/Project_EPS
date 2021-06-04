@@ -1,0 +1,107 @@
+<!doctype html>
+
+<head>
+    <style>
+    /* CSS comes here */
+    html,body{
+        background-color:  white;
+    }
+    #video {
+        border: 1px solid #ccc;
+        width: 320px;
+        height: 240px;
+    }
+
+    #photo {
+        border: 1px solid black;
+        width: 320px;
+        height: 240px;
+    }
+
+    #canvas {
+        display: none;
+    }
+
+    .camera {
+        padding: 30px;
+        display: inline-block;
+    }
+
+    .output {
+        width: 340px;
+        display: inline-block;
+    }
+
+    #startbutton {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        bottom: 0px;
+        padding: 10px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 1.0);
+        cursor: pointer;
+    }
+
+    .contentarea {
+        font-size: 16px;
+        font-family: Arial;
+        text-align: center;
+    }
+    li{
+        font-weight: bolder;
+        font-family: Arial;
+        font-size: 16px;
+        list-style: none;
+    }
+    .agree{
+        color: red;
+    }
+    b{
+        color: red;
+    }
+    
+    </style>
+    <title>Exam Instructions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-info text-light text-center">Submission Page</div>
+                    <div class="card-body">
+                        <center>
+                        <br>
+                        <h1 class="text-danger">Your Test Has Been Successfully Completed</h1><br><br>
+                        <h2>
+                          <li>Total Questions: 1</li><br>
+                          <li>Total Responses: 1</li><br>
+                        </h2>
+                    
+                        
+                           <!-- <button id="next" class="btn btn-danger" onclick="close_window();">Close</button>-->
+                  
+                    </div>
+               </center>
+                    <div class="card-footer bg-info text-center text-light">&copy; Exam Monitoring system</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script type="text/javascript">
+        function close_window() {
+            close();
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+    /* CSS comes here */
+    html,body{
+        background-color:  white;
+    }
+    #video {
+        border: 1px solid #ccc;
+        width: 320px;
+        height: 240px;
+    }
+
+    #photo {
+        border: 1px solid black;
+        width: 320px;
+        height: 240px;
+        margin-left: 35px;
+    }
+
+    #canvas {
+        display: none;
+    }
+
+    .camera {
+        padding: 30px;
+        display: inline-block;
+    }
+
+    .output {
+        width: 340px;
+        display: inline-block;
+    }
+
+    #startbutton {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        bottom: 0px;
+        padding: 10px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 1.0);
+        cursor: pointer;
+    }
+
+    .contentarea {
+        font-size: 16px;
+        font-family: Arial;
+        text-align: center;
+    }
+    li{
+        
+        font-family: Arial;
+        font-size: 16px;
+        list-style: none;
+    }
+    a{
+        align-content: center;
+    }
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+    </style>
+    <title>Exam Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header bg-info text-light text-center">Exam Page</div>
+                    <div class="card-body">
+                      
+
+                        {% block content %}
+
+                        <form method="POST" action="{{url_for('saveAns')}}">
+                        <div class="question"><h5><input type="text" name="qid" value={{quest.qid}} style="border-style:none; width:20px"> <input type="text" name="subject" value='{{quest.subject}}' style="border-style:none"> </h5></div>
+                        <div class="qst">{{quest.question}}</div>
+                          <div class="opt"><input type="radio" name="answer" value="1"> {{quest.option1}}</div>
+                          <div class="opt"><input type="radio" name="answer" value="2"> {{quest.option2}}</div>
+                          <div class="opt"><input type="radio" name="answer" value="3"> {{quest.option3}}</div>
+                          <div class="opt"><input type="radio" name="answer" value="4"> {{quest.option4}}</div>
+                          <input type="submit" value="Save Answer"/>
+                        </form>
+                        {% endblock %}
+                                                <center>
+                            <br><br>
+                            <button id="myBtn" class="btn btn-success" data-toggle="modal" data-target="#myModal">Submit Test</button></center>
+                    </div><br>
+
+                    <div class="card-footer bg-info text-center text-light">&copy; Exam Monitoring system</div>
+                </div>
+            </div>
+            <div class="col mt-2" style="margin-top: 1px!important;">
+                <div class="contentarea card">
+                    <div class="card-header bg-primary text-center text-light">You Are Proctoring</div>
+                     <div class="camera">
+                        <!--<video id="video">Video stream not available.</video>-->
+                        <div class="output"  style="display: block; margin-left: 40px;">
+                        <img id="photo" alt="The screen capture will appear in this box." width="50" height="50" src="{{ url_for('video') }} ">
+                    </div>
+                </div>
+              </div>
+
+                <br><br>
+                <div class="contentarea card">
+                  <div class="card-header bg-primary text-center text-light"><b>Your Questions<b></div>
+                  <div class="Questions">
+                    {% block questList %}
+                        <br><br>
+                        {% for q in questList %}
+                          <a href="{{url_for('showQuest',subject=q.subject,qid=q.qid)}}"><button value={{q.qid}}  id={{q.qid}}   style="margin:2px; width:40px; height:40px;background-color:{{q.bcol}}">{{loop.index}}</button></a>
+                        {% endfor %}  
+
+                        <br><br><a href="{{url_for('submission')}}"><button>Display Result</button></a>
+                        {% endblock %}
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal -->
+     <!-- The Modal -->
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Test Submission</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Are You Sure Want To Submit The Test?
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+       <a href="submissionpage.html"><button type="button" class="btn btn-success">Submit</button></a>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+    <script>
+    function change(argument) {
+        // body...
+        window.open("submissionpage.html");
+    }
+    </script>
+    
+
+    <script>
+    /* JS comes here */
+    (function() {
+
+        var width = 320; // We will scale the photo width to this
+        var height = 0; // This will be computed based on the input stream
+
+        var streaming = false;
+
+        var video = null;
+        var canvas = null;
+        var photo = null;
+        var startbutton = null;
+
+        function startup() {
+            video = document.getElementById('video');
+            canvas = document.getElementById('canvas');
+            photo = document.getElementById('photo');
+            startbutton = document.getElementById('startbutton');
+
+            navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: false
+                })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.log("An error occurred: " + err);
+                });
+
+            video.addEventListener('canplay', function(ev) {
+                if (!streaming) {
+                    height = video.videoHeight / (video.videoWidth / width);
+
+                    if (isNaN(height)) {
+                        height = width / (4 / 3);
+                    }
+
+                    video.setAttribute('width', width);
+                    video.setAttribute('height', height);
+                    canvas.setAttribute('width', width);
+                    canvas.setAttribute('height', height);
+                    streaming = true;
+                }
+            }, false);
+
+            startbutton.addEventListener('click', function(ev) {
+                takepicture();
+                ev.preventDefault();
+            }, false);
+
+            clearphoto();
+        }
+
+
+        function clearphoto() {
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#AAA";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            var data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+        }
+
+        function takepicture() {
+            var context = canvas.getContext('2d');
+            if (width && height) {
+                canvas.width = width;
+                canvas.height = height;
+                context.drawImage(video, 0, 0, width, height);
+
+                var data = canvas.toDataURL('image/png');
+                photo.setAttribute('src', data);
+                alert("Photo Added");
+            } else {
+                clearphoto();
+            }
+        }
+
+        window.addEventListener('load', startup, false);
+    })();
+    </script>
+</body>
+
+</html>

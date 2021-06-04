@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <style>
+    /* CSS comes here */
+    html,body{
+        background-color:  white;
+    }
+    
+    #startbutton {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        bottom: 0px;
+        padding: 10px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 1.0);
+        cursor: pointer;
+    }
+
+    .contentarea {
+        font-size: 16px;
+        font-family: Arial;
+        text-align: center;
+    }
+    li{
+        font-weight: bolder;
+        font-family: Arial;
+        font-size: 16px;
+    }
+    a{
+        align-content: center;
+    }
+    b{
+        color: red;
+    }
+    
+    </style>
+    <title>Face verification </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    {% block content %}
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header bg-info text-light text-center">Instructions</div>
+                    <div class="card-body">
+                         <li>Before taking the test student have to read the instructions carefully</li><br>
+                        
+                        <li>Before you take a proctored exam, make sure have approved ID verification photos by your college administration</li><br>
+                        <li>In this window software will verify your face and you have to cooperate with the software</li><br>
+                        <li>Student photo on id and the student attending for exams should be same</li><br>
+                        <li>You must not use headphones, ear buds, or any other type of listening equipment.</li><br>
+                        <li>You must close all other programs or windows on your testing computer before you begin the exam.</li><br>
+                        <li>You must not use a phone for any reason.</li><br>
+                        <li>You must not leave the room during the exam for any reason, unless posted rules for the exam specifically permit you to do so.</li><br>
+                        <li>If you violate the online proctoring rules and receive an Unsatisfactory status, you automatically receive a score of 0 for the exam.</li><br>
+                         <li>If you have questions about your proctoring exam status consult your course team.</li><br>
+                        <form action="softwareinstructions.html" a onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">
+
+<b><input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the Terms and Conditions and Privacy Policy
+
+</b><br>                        <center><a href="softwareinstructions.html"><button id="next" class="btn btn-success">Next &nbsp;&nbsp;&gt;</button></a></center></form>
+                    </div>
+
+                    <div class="card-footer bg-info text-center text-light">&copy; Exam Monitoring system</div>
+                </div>
+            </div>
+            <div class="col mt-5" style="margin-top: 130px!important;">
+                <div class="contentarea card">
+                    <div class="card-header bg-primary text-center text-light">Verify your face</div>
+                    <div class="output" style="display: none;">
+                        <img id="photo" alt="The screen capture will appear in this box." src="{{ url_for('video') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
