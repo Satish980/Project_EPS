@@ -3,7 +3,10 @@ import face_recognition
 import cv2
 from face_recognition.api import face_distance, face_encodings, face_locations
 import numpy as np 
-
+import time as t
+from tkinter import * 
+from tkinter import messagebox
+import sys
 #webcam reference
 
 #captureDevice = cv2.VideoCapture(0, cv2.CAP_DSHOW)
@@ -12,6 +15,7 @@ import numpy as np
 
 
 # define a video capture object
+str_id = input("Enter Your ID: ")
 video_capture = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 guru_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160552\S160552.jpg")
 guru_face_encoding = face_recognition.face_encodings(guru_img)[0]
@@ -43,6 +47,7 @@ face_locations = []
 face_encodings = []
 face_names = []
 process_this_frame = True
+c = 0
 
 while True:
     #
@@ -82,17 +87,31 @@ while True:
 
     process_this_frame = not process_this_frame
 
+
     #Display results
-    """for(top, right, bottom, left), name in zip(face_locations, face_names):
+    for(top, right, bottom, left), name in zip(face_locations, face_names):
         #Scale back up locations since the frame we detected in was scaled to 1/4 size
         top *= 4
         right *= 4
         bottom *= 4
         left *= 4
-        if name != "Unknown":
+        if name != "Unknown" and name == str_id:
             color = (0,128,0)
+
         else:
             color = (0,255,255)
+            """root = Tk()
+            root.geometry("300x200")
+  
+            w = Label(root, text ='GeeksForGeeks', font = "50") 
+            w.pack()
+              
+            #messagebox.showinfo("showinfo", "Information")
+              
+            #messagebox.showwarning("showwarning", "Warning")
+              
+            messagebox.showerror("Error While Detecting", "Face is not matching with User ID")"""
+  
         # draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
@@ -100,9 +119,28 @@ while True:
         cv2.rectangle(frame, (left, bottom - 35), (right, bottom), color , cv2.FILLED)
         font = cv2.FONT_HERSHEY_COMPLEX
         cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255,255,255),1)
-        #cv2.putText(frame,name)"""
+        
+        if name!=str_id:
+            """root = Tk()
+            root.geometry("300x200")
+  
+            w = Label(root, text ='GeeksForGeeks', font = "50") 
+            w.pack()"""
+              
+            #messagebox.showinfo("showinfo", "Information")
+              
+            #messagebox.showwarning("showwarning", "Warning")
+            c += 1
+            root = Tk()
+            root.withdraw()
+            messagebox.showerror("Error While Detecting", "Face is not matching with User ID")
+            
+            #sys.exit()
+            if c == 5:
+                sys.exit()
+        #cv2.putText(frame,name)
     # x = top, y = right , w = bottom , h = left
-    for ((x, y, w, h), name) in zip(face_locations, face_names):
+    """for ((x, y, w, h), name) in zip(face_locations, face_names):
             x1,y1=x+w, y+h
             cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 1)
             cv2.line(frame, (x,y), (x+30, y),(0,0,255), 6) #Top Left
@@ -118,7 +156,7 @@ while True:
             cv2.line(frame, (x1,y1), (x1, y1-30),(0,0,255), 6)
 
             cv2.putText(frame, name, (h+6, w-6), cv2.FONT_HERSHEY_SIMPLEX,
-            0.75, (0, 0, 255), 1)
+            0.75, (0, 0, 255), 1)"""
 
     #Display the resulting image
     cv2.imshow('Video',frame)

@@ -88,15 +88,15 @@
                         <li>If you violate the online proctoring rules and receive an Unsatisfactory status, you automatically receive a score of 0 for the exam.</li><br>
                          <li>If you have questions about your proctoring exam status consult your course team.</li><br>
                         
-                       
+          <!--             
 
 <b><input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the Terms and Conditions and Privacy Policy
 
-</b>
+</b>-->
                         <br>
                         <center>
-                            <a href="verifyid.html"><button id="next" class="btn btn-success">&lt;&nbsp;&nbsp;Prev </button></a>
-                            <a href="testpage.html"><button id="submit" class="btn btn-success" onsubmit="formfunc()">Next &nbsp;&nbsp;&gt;</button></a></center>
+                           <!-- <a href="{{url_for('verifyID')}}"><button id="next" class="btn btn-success">&lt;&nbsp;&nbsp;Prev </button></a>
+                            --><a href="{{url_for('quiz')}}"><button id="submit" class="btn btn-success">Next &nbsp;&nbsp;&gt;</button></a></center>
                     </div>
                
                     <div class="card-footer bg-info text-center text-light">&copy; Exam Monitoring system</div>

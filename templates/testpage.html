@@ -117,18 +117,19 @@
                         {% block content %}
 
                         <form method="POST" action="{{url_for('saveAns')}}">
-                        <div class="question"><h5><input type="text" name="qid" value={{quest.qid}} style="border-style:none; width:20px"> <input type="text" name="subject" value='{{quest.subject}}' style="border-style:none"> </h5></div>
-                        <div class="qst">{{quest.question}}</div>
+                        <div class="question"><h5>
+                        <label for="text" name="qid" value={{quest.qid}} style="border-style:none; width:20px">{{quest.qid}}</label> <input type="text" name="subject" value='{{quest.subject}}' style="border-style:none"> </h5></div>
+                        <div class="qst">{{quest.question}}</div><br><br>
                           <div class="opt"><input type="radio" name="answer" value="1"> {{quest.option1}}</div>
                           <div class="opt"><input type="radio" name="answer" value="2"> {{quest.option2}}</div>
                           <div class="opt"><input type="radio" name="answer" value="3"> {{quest.option3}}</div>
-                          <div class="opt"><input type="radio" name="answer" value="4"> {{quest.option4}}</div>
-                          <input type="submit" value="Save Answer"/>
+                          <div class="opt"><input type="radio" name="answer" value="4"> {{quest.option4}}</div><br>
+                          <input type="submit" value="Save Answer" class="btn btn-success" />
                         </form>
                         {% endblock %}
                                                 <center>
-                            <br><br>
-                            <button id="myBtn" class="btn btn-success" data-toggle="modal" data-target="#myModal">Submit Test</button></center>
+                            <br><br><br><br><br>
+                            <button id="myBtn" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Submit Test</button></center>
                     </div><br>
 
                     <div class="card-footer bg-info text-center text-light">&copy; Exam Monitoring system</div>
@@ -150,9 +151,9 @@
                   <div class="card-header bg-primary text-center text-light"><b>Your Questions<b></div>
                   <div class="Questions">
                     {% block questList %}
-                        <br><br>
+                        <br>
                         {% for q in questList %}
-                          <a href="{{url_for('showQuest',subject=q.subject,qid=q.qid)}}"><button value={{q.qid}}  id={{q.qid}}   style="margin:2px; width:40px; height:40px;background-color:{{q.bcol}}">{{loop.index}}</button></a>
+                          <a href="{{url_for('showQuest',subject=q.subject,qid=q.qid)}}"><button value={{q.qid}}  id={{q.qid}}   style="margin:2px; width:65px; height:40px;background-color:{{q.bcol}}; "class = "btn btn-dark">{{loop.index}}</button></a>
                         {% endfor %}  
 
                         <br><br><a href="{{url_for('submission')}}"><button>Display Result</button></a>

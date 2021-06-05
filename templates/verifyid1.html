@@ -90,15 +90,15 @@
                         <li>You must not leave the room during the exam for any reason, unless posted rules for the exam specifically permit you to do so.</li><br>
                         <li>If you violate the online proctoring rules and receive an Unsatisfactory status, you automatically receive a score of 0 for the exam.</li><br>
                          <li>If you have questions about your proctoring exam status consult your course team.</li><br>
-                       <!-- <form action="http://localhost:5000/softwareinstructions" method="POST" a onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">-->
-                        <form action="http://localhost:5000/softwareinstructions" method="POST">
+                       <form action="{{ url_for('softwareinstructions') }}" method="POST" a onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">
+                       
 
 <b><input type="checkbox" name="checkbox" value="check" id="agree" />  I have read and agree to the Terms and Conditions and Privacy Policy
 
 </b><br>                        <center><a href="softwareinstructions.html"><button id="next" class="btn btn-success">Next &nbsp;&nbsp;&gt;</button></a></center></form>
                     </div>
 
-                    <div class="card-footer bg-info text-center text-light">&copy; Exam Monitoring system</div>
+                    <div class="card-footer bg-info text-center text-heavy">&copy; Exam Monitoring system</div>
                 </div>
             </div>
             <div class="col mt-5" style="margin-top: 0px!important;">
