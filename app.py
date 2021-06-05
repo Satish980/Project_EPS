@@ -102,12 +102,15 @@ def test():
   return render_template('testpage.html')
 
 @app.route('/quiz')
+
 def quiz(): 
     session['result']=""
     subject= "Numerical"
+    c = 0
     questList=questions.query.filter_by(subject=subject).all()
     quest=questions.query.filter_by(subject=subject).first()
-    return render_template("testpage.html",questList=questList, quest=quest) 
+    c += 1
+    return render_template("testpage.html",questList=questList, quest=quest,c=c) 
     
     
 @app.route("/showQuest/<string:subject>,<int:qid>")
