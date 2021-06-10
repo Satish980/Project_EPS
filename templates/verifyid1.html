@@ -90,121 +90,36 @@
                         <li>You must not leave the room during the exam for any reason, unless posted rules for the exam specifically permit you to do so.</li><br>
                         <li>If you violate the online proctoring rules and receive an Unsatisfactory status, you automatically receive a score of 0 for the exam.</li><br>
                          <li>If you have questions about your proctoring exam status consult your course team.</li><br>
-                       <form action="{{ url_for('softwareinstructions') }}" method="POST" a onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">
+                       <form action="{{ url_for('face_valid') }}" method="POST" a onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">
                        
-
+<br>
 <b><input type="checkbox" name="checkbox" value="check" id="agree" />  I have read and agree to the Terms and Conditions and Privacy Policy
-
-</b><br>                        <center><a href="softwareinstructions.html"><button id="next" class="btn btn-success">Next &nbsp;&nbsp;&gt;</button></a></center></form>
+<br><br>
+</b><br>                        <center><a href="{{ url_for('face_valid') }}"><button id="next" class="btn btn-success">Next &nbsp;&nbsp;&gt;</button></a></center></form>
                     </div>
+                    <br>
 
-                    <div class="card-footer bg-info text-center text-heavy">&copy; Exam Monitoring system</div>
+                    <div class="card-footer bg-info text-center text-heavy"><strong style="color: black;">&copy; Exam Monitoring system</strong></div>
                 </div>
             </div>
             <div class="col mt-5" style="margin-top: 0px!important;">
                 <div class="contentarea card">
-                    <div class="card-header bg-primary text-center text-light"><b>Verify your face</b></div>
+                    <div class="card-header bg-primary text-center text-light" style="color: black;"><b>Verify your face</b></div>
                     <div class="camera">
                         <!--<video id="video">Video stream not available.</video>-->
                         <div class="output"  style="display: block; margin-left: 40px;">
                         <img id="photo" alt="The screen capture will appear in this box." width="50" height="50" src="{{ url_for('video') }} ">
                     </div>
                     </div>
-                  <!--  <div class="card-footer bg-primary text-center text-light">
-                        <button id="startbutton" class="btn btn-success">Take photo</button></div>
-                    <canvas id="canvas"></canvas>
-                    
-                </div>-->
+                {% if error %}
+                <p class="text-danger"><strong>Error:  {{ error }}</strong></p>
+                <script type="text/javascript">
+                    windows.alert('{{error}}')
+                </script>
+                {% endif %}
             </div>
         </div>
     </div>
-    <!--
-
-    <script>
-
-    /* JS comes here */
-    (function() {
-
-        var width = 320; // We will scale the photo width to this
-        var height = 0; // This will be computed based on the input stream
-
-        var streaming = false;
-
-        var video = null;
-        var canvas = null;
-        var photo = null;
-        var startbutton = null;
-
-        function startup() {
-            video = document.getElementById('video');
-            canvas = document.getElementById('canvas');
-            photo = document.getElementById('photo');
-            startbutton = document.getElementById('startbutton');
-
-            navigator.mediaDevices.getUserMedia({
-                    video: true,
-                    audio: false
-                })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    video.play();
-                })
-                .catch(function(err) {
-                    console.log("An error occurred: " + err);
-                });
-
-            video.addEventListener('canplay', function(ev) {
-                if (!streaming) {
-                    height = video.videoHeight / (video.videoWidth / width);
-
-                    if (isNaN(height)) {
-                        height = width / (4 / 3);
-                    }
-
-                    video.setAttribute('width', width);
-                    video.setAttribute('height', height);
-                    canvas.setAttribute('width', width);
-                    canvas.setAttribute('height', height);
-                    streaming = true;
-                }
-            }, false);
-
-            startbutton.addEventListener('click', function(ev) {
-                takepicture();
-                ev.preventDefault();
-            }, false);
-
-            clearphoto();
-        }
-
-
-        function clearphoto() {
-            var context = canvas.getContext('2d');
-            context.fillStyle = "#AAA";
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            var data = canvas.toDataURL('image/png');
-            photo.setAttribute('src', data);
-        }
-
-        function takepicture() {
-            var context = canvas.getContext('2d');
-            if (width && height) {
-                canvas.width = width;
-                canvas.height = height;
-                context.drawImage(video, 0, 0, width, height);
-
-                var data = canvas.toDataURL('image/png');
-                photo.setAttribute('src', data);
-                alert("Photo Added");
-            } else {
-                clearphoto();
-            }
-        }
-
-        window.addEventListener('load', startup, false);
-    })();
-    </script>-->
     {% endblock %}
 </body>
 

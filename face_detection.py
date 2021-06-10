@@ -3,10 +3,10 @@ import face_recognition
 import cv2
 from face_recognition.api import face_distance, face_encodings, face_locations
 import numpy as np 
-import time as t
-from tkinter import * 
-from tkinter import messagebox
-import sys
+#import time as t
+#from tkinter import * 
+#from tkinter import messagebox
+#import sys
 #webcam reference
 
 #captureDevice = cv2.VideoCapture(0, cv2.CAP_DSHOW)
@@ -15,16 +15,15 @@ import sys
 
 
 # define a video capture object
-str_id = input("Enter Your ID: ")
-video_capture = cv2.VideoCapture(0,cv2.CAP_DSHOW)
-guru_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160552\S160552.jpg")
+#str_id = input("Enter Your ID: ")
+#video_capture = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+guru_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160552\S160552.jpg")
 guru_face_encoding = face_recognition.face_encodings(guru_img)[0]
-print(guru_face_encoding)
-sat_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160980\S160980.jpg")
+sat_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160980\S160980.jpg")
 sat_face_encoding = face_recognition.face_encodings(sat_img)[0]
-ram_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160414\S160414.jpeg")
+ram_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160414\S160414.jpeg")
 ram_face_encoding = face_recognition.face_encodings(ram_img)[0]
-uday_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160827\S160827.jpeg")
+uday_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160827\S160827.jpeg")
 uday_face_encoding = face_recognition.face_encodings(uday_img)[0]
 
 #known faces array
@@ -100,17 +99,7 @@ while True:
 
         else:
             color = (0,255,255)
-            """root = Tk()
-            root.geometry("300x200")
-  
-            w = Label(root, text ='GeeksForGeeks', font = "50") 
-            w.pack()
-              
-            #messagebox.showinfo("showinfo", "Information")
-              
-            #messagebox.showwarning("showwarning", "Warning")
-              
-            messagebox.showerror("Error While Detecting", "Face is not matching with User ID")"""
+           
   
         # draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
@@ -121,15 +110,6 @@ while True:
         cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255,255,255),1)
         
         if name!=str_id:
-            """root = Tk()
-            root.geometry("300x200")
-  
-            w = Label(root, text ='GeeksForGeeks', font = "50") 
-            w.pack()"""
-              
-            #messagebox.showinfo("showinfo", "Information")
-              
-            #messagebox.showwarning("showwarning", "Warning")
             c += 1
             root = Tk()
             root.withdraw()

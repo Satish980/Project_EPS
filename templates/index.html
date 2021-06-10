@@ -9,11 +9,11 @@
 <body>
 <!-- partial:index.partial.html -->
 {% block content %}
-{% if error %}
-    <p><strong>Error:</strong> {{ error }}
- {% endif %}
+
 <form action="http://localhost:5000/login" method="POST">
-	
+	{% if error %}
+    <div class="invalid-feedback"><strong>Error:</strong> {{ error }}</div>
+ {% endif %}
 	<img src="{{ url_for('static', filename = 'logo.jpg') }}" style="margin-left: 15px;">
 
 	<div class="inputGroup inputGroup1">
@@ -28,6 +28,7 @@
 	<div class="inputGroup inputGroup3">
 		<button id="login">Log in</button>
 	</div>	
+	
 </form>
 {% endblock %}
 <!-- partial -->

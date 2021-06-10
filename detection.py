@@ -14,13 +14,14 @@ class Video:
 # define a video capture object
     def __init__(self):
         self.video_capture = cv2.VideoCapture(0,cv2.CAP_DSHOW)
-    guru_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160552\S160552.jpg")
+    guru_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160552\S160552.jpg")
     guru_face_encoding = face_recognition.face_encodings(guru_img)[0]
-    sat_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160980\S160980.jpg")
+    print(guru_face_encoding)
+    sat_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160980\S160980.jpg")
     sat_face_encoding = face_recognition.face_encodings(sat_img)[0]
-    ram_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160414\S160414.jpeg")
+    ram_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160414\S160414.jpeg")
     ram_face_encoding = face_recognition.face_encodings(ram_img)[0]
-    uday_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\Project_EPS\Flask_Py\images\S160827\S160827.jpeg")
+    uday_img = face_recognition.load_image_file(r"C:\Users\satish\Desktop\P\P\images\S160827\S160827.jpeg")
     uday_face_encoding = face_recognition.face_encodings(uday_img)[0]
 
     #known faces array

@@ -59,6 +59,12 @@
     a{
         align-content: center;
     }
+    .opt{
+      margin-left: 30px;
+    }
+    .qst{
+      margin-left: 30px;
+    }
     /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -97,6 +103,7 @@
   text-decoration: none;
   cursor: pointer;
 }
+
     </style>
     <title>Exam Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -110,27 +117,42 @@
         <div class="row mt-3">
             <div class="col-sm-8">
                 <div class="card">
-                    <div class="card-header bg-info text-light text-center">Exam Page</div>
-                    <div class="card-body">
-                      
 
+                    <div class="card-header bg-info text-light text-center">Exam Page</div>
+                    <div class="card-body" id="qnbody">
+                      
+                         <strong>
                         {% block content %}
 
                         <form method="POST" action="{{url_for('saveAns')}}">
-                        <div class="question"><h5>
-                        <label for="text" name="qid" value={{quest.qid}} style="border-style:none; width:20px">{{quest.qid}}</label> <input type="text" name="subject" value='{{quest.subject}}' style="border-style:none"> </h5></div>
-                        <div class="qst">{{quest.question}}</div><br><br>
-                          <div class="opt"><input type="radio" name="answer" value="1"> {{quest.option1}}</div>
-                          <div class="opt"><input type="radio" name="answer" value="2"> {{quest.option2}}</div>
-                          <div class="opt"><input type="radio" name="answer" value="3"> {{quest.option3}}</div>
-                          <div class="opt"><input type="radio" name="answer" value="4"> {{quest.option4}}</div><br>
-                          <input type="submit" value="Save Answer" class="btn btn-success" />
+                        <div class="question"><h3>
+                        <input type="text" name="qid" value="{{quest.qid}}" style="border-style:none; width:20px;">
+                        <input type="text" name="subject" value="{{quest.subject}}" style="border-style:none"></h3></div>
+                        <br><br> 
+                        <div class="qst" >{{quest.question}}</div><br>
+                          <div class="opt"><input type="radio" name="answer" value="{{quest.option1}}" id="op1"> {{quest.option1}}</div>
+                          <div class="opt"><input type="radio" name="answer" value="{{quest.option2}}" id="op2"> {{quest.option2}}</div>
+                          <div class="opt"><input type="radio" name="answer" value="{{quest.option2}}" id="op3"> {{quest.option3}}</div>
+                          <div class="opt"><input type="radio" name="answer" value="{{quest.option2}}" id="op4"> {{quest.option4}}</div>
+                          <br>
+                          {% if quest.useranswer == None or quest.useranswer == "" %}
+                          <div class="opt">You Not Selected Any Option</div><br><br>
+                          {% elif quest.useranswer!=None and quest.bcol == "red" %}
+                          <div class="opt">You Marked: <label>{{quest.useranswer}}</label></div><br><br>
+                          {% elif quest.useranswer!=None and quest.bcol == "green" %}
+                          <div class="opt">You Selected: <label>{{quest.useranswer}}</label></div><br><br>
+                          {% endif %}
+                          <input type="submit" value="Next" class="btn btn-success" />
                         </form>
+                          <br><br><br><br><br>
+                         
+                        <center>
+                           </strong>
+                            
                         {% endblock %}
-                                                <center>
-                            <br><br><br><br><br>
-                            <button id="myBtn" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Submit Test</button></center>
+                                                
                     </div><br>
+                    <br><br><br><br><br>
 
                     <div class="card-footer bg-info text-center text-light">&copy; Exam Monitoring system</div>
                 </div>
@@ -141,7 +163,7 @@
                      <div class="camera">
                         <!--<video id="video">Video stream not available.</video>-->
                         <div class="output"  style="display: block; margin-left: 40px;">
-                        <img id="photo" alt="The screen capture will appear in this box." width="50" height="50" src="{{ url_for('video') }} ">
+                        <img id="photo" alt="The screen capture will appear in this box." width="50" height="50" src="{{url_for('video_main')}}">
                     </div>
                 </div>
               </div>
@@ -151,14 +173,25 @@
                   <div class="card-header bg-primary text-center text-light"><b>Your Questions<b></div>
                   <div class="Questions">
                     {% block questList %}
+
                         <br>
                         {% for q in questList %}
-                          <a href="{{url_for('showQuest',subject=q.subject,qid=q.qid)}}"><button value={{q.qid}}  id={{q.qid}}   style="margin:2px; width:65px; height:40px;background-color:{{q.bcol}}; "class = "btn btn-dark">{{loop.index}}</button></a>
+                          <a href="{{url_for('showQuest',subject=q.subject,qid=q.qid)}}">
+                            <button value={{q.qid}}  id={{q.qid}}   style="margin:10px; width:65px; height:40px;background-color:{{q.bcol}}; border-radius: 9px;" >{{loop.index}}</button>
+                          </a>
+                          
                         {% endfor %}  
 
-                        <br><br><a href="{{url_for('submission')}}"><button>Display Result</button></a>
-                        {% endblock %}
+                        
+                    {% endblock %}
+                    
+                
+                            </center>
                   </div>
+                  <br><center>
+                  <button id="myBtn" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Submit Test</button>
+                  <br>
+                </center>
                 </div>
             </div>
         </div>
@@ -183,106 +216,29 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-       <a href="submissionpage.html"><button type="button" class="btn btn-success">Submit</button></a>
+       <a href="{{url_for('submission')}}"><button type="button" class="btn btn-success">Submit</button></a>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         </div>
         
       </div>
     </div>
   </div>
-
+<!--
     <script>
-    function change(argument) {
-        // body...
-        window.open("submissionpage.html");
-    }
+      var elem = document.documentElement;
+      function openFullscreen() {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+          elem.msRequestFullscreen();
+        }
+      }
     </script>
+
+  -->
     
-
-    <script>
-    /* JS comes here */
-    (function() {
-
-        var width = 320; // We will scale the photo width to this
-        var height = 0; // This will be computed based on the input stream
-
-        var streaming = false;
-
-        var video = null;
-        var canvas = null;
-        var photo = null;
-        var startbutton = null;
-
-        function startup() {
-            video = document.getElementById('video');
-            canvas = document.getElementById('canvas');
-            photo = document.getElementById('photo');
-            startbutton = document.getElementById('startbutton');
-
-            navigator.mediaDevices.getUserMedia({
-                    video: true,
-                    audio: false
-                })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    video.play();
-                })
-                .catch(function(err) {
-                    console.log("An error occurred: " + err);
-                });
-
-            video.addEventListener('canplay', function(ev) {
-                if (!streaming) {
-                    height = video.videoHeight / (video.videoWidth / width);
-
-                    if (isNaN(height)) {
-                        height = width / (4 / 3);
-                    }
-
-                    video.setAttribute('width', width);
-                    video.setAttribute('height', height);
-                    canvas.setAttribute('width', width);
-                    canvas.setAttribute('height', height);
-                    streaming = true;
-                }
-            }, false);
-
-            startbutton.addEventListener('click', function(ev) {
-                takepicture();
-                ev.preventDefault();
-            }, false);
-
-            clearphoto();
-        }
-
-
-        function clearphoto() {
-            var context = canvas.getContext('2d');
-            context.fillStyle = "#AAA";
-            context.fillRect(0, 0, canvas.width, canvas.height);
-
-            var data = canvas.toDataURL('image/png');
-            photo.setAttribute('src', data);
-        }
-
-        function takepicture() {
-            var context = canvas.getContext('2d');
-            if (width && height) {
-                canvas.width = width;
-                canvas.height = height;
-                context.drawImage(video, 0, 0, width, height);
-
-                var data = canvas.toDataURL('image/png');
-                photo.setAttribute('src', data);
-                alert("Photo Added");
-            } else {
-                clearphoto();
-            }
-        }
-
-        window.addEventListener('load', startup, false);
-    })();
-    </script>
 </body>
 
 </html>

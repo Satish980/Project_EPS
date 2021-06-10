@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h2>Fullscreen with JavaScript</h2>
+<p>Click on the "Open Fullscreen" button to open this page in fullscreen mode. Close it by either clicking the "Esc" key on your keyboard, or with the "Close Fullscreen" button.</p>
+
+<button onclick="openFullscreen();">Open Fullscreen</button>
+<button onclick="closeFullscreen();">Close Fullscreen</button>
+
+<script type="text/javascript">
+window.onload = function() {
+  window.moveTo(0, 0);
+  window.resizeTo(screen.availWidth, screen.availHeight);
+}
+</script>
+
+<p>Note: Internet Explorer 10 and earlier versions do not support fullscreen mode.</p>
+
+</body>
+</html>
+
