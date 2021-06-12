@@ -65,7 +65,7 @@ class VideoMain(object):
                 self.count+=1
 
             if(self.count==10):
-                color = "success"
+                color = "danger"
                 log = "Student Looked at Right : " + pos + " Left: "+ leftPos
                 query = "INSERT INTO Logtable(Log, SID, timeStamp,color) VALUES (?,?,?,?)"
                 con.execute(query,(log,s_id,ct,color))

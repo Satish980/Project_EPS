@@ -11,9 +11,14 @@
 <body>
 {% block content %}
 <div class="container" style="margin-top:20px;">
-  
+  <a href="{{url_for('logs')}}"><button class="btn btn-success">Exam Logs</button></a>&nbsp;&nbsp;&nbsp;<a href="{{url_for('index')}}"><button class="btn btn-danger">Logout</button></a><br><br>
   <input class="form-control" id="myInput" type="text" placeholder="Search..">
   <br>
+  {% if error %}
+      <div class="alert alert-success">
+          <strong>Success</strong> {{ error }}
+      </div>
+  {% endif %}
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
@@ -26,7 +31,9 @@
       {% for i in range(0, l) %}
       <tr>
         <td>{{sids[i]}}</td>
-        <td class="text-{{color[i]}} font-weight-bold">{{logs[i]}}</td>
+        <td>
+          <a href="{{ url_for('tunblock',sid=sids[i]) }}"><button class="btn btn-{{ color[i] }}">{{logs[i]}}</button></a>
+        </td>
         <td>{{date[i]}}</td>
       </tr>
       {% endfor %}

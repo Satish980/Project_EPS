@@ -10,14 +10,14 @@
 <!-- partial:index.partial.html -->
 {% block content %}
 
-<form action="http://localhost:5000/login" method="POST" autocomplete="off">
+<form action="http://localhost:5000/login" method="POST">
 	{% if error %}
     <div class="invalid-feedback"><strong>Error:</strong> {{ error }}</div>
  {% endif %}
 	<img src="{{ url_for('static', filename = 'logo.jpg') }}" style="margin-left: 15px;">
 
 	<div class="inputGroup inputGroup1">
-		<label for="email1">User ID</label>
+		<label for="email1">Admin ID</label>
 		<input type="text" id="email" class="email" maxlength="256" name="sid" />
 		<span class="indicator"></span>
 	</div>
